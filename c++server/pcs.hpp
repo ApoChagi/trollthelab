@@ -8,5 +8,6 @@ class pcs{
     pcs();
     int pcsinuse();
     string[] users();
-    void registerpc();
+    bool registerpc();
+    bool uregisterpc();
 };
