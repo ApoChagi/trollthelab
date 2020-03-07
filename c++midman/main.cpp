@@ -1,44 +1,39 @@
-#define MAXLENGHT 255
-
-#include <iostream>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include "SerialPort.hpp"
-
+#include<iostream>
 using namespace std;
+#include<string>
+#include<stdlib.h>
+#include"serial.hpp"
 
-char *portname="\\\\.\\COM5";
-char incomingData[maxlenght];
-char ledON[]="ON\n";
-char ledOFF[]="OFF\n";
+char output[MAX_DATA_LENGTH];
+char incomingData[MAX_DATA_LENGTH];
 
-SerialPort *arduino;
+// change the name of the port with the port name of your computer
+// must remember that the backslashes are essential so do not remove them
+char *port = "\\\\.\\COM3";
 
-const int delay=1000;
-
-void receive(){
-  int readRes=arduino->readSerialPort(incomingData, maxlenght);
-  printf("%s", incomingData);
-  Sleep(10);
-}
-void write(unsigned int delay){}
-  arduino->writeSerialPort(ledON, MAXLENGHT);
-  Sleep(delay);
-  arduino->writeSerialPort(ledOFF, MAXLENGHT);
-}
-void connect(){
-  while(!arduino->isConnected()){
-    Sleep(100);
-    arduino=new SerialPort(portname);
-    if(arduino->isConnected())cout<<"is connected"<<endl;
-    while(arduino->isConnected())write(delay);
-    while(arduino->isConnected())receive();
-    connect();
-  }
-}
 int main(){
-  arduino=new SerialPort(portname);
+	SerialPort arduino(port);
+	if(arduino.isConnected()){
+		cout<<"Connection made"<<endl<<endl;
+	}
+	else{
+		cout<<"Error in port name"<<endl<<endl;
+	}
+	while(arduino.isConnected()){
+		cout<<"Enter your command: "<<endl;
+		string data;
+		cin>>data;
 
-  connect();
+		char *charArray = new char[data.size() + 1];
+		copy(data.begin(), data.end(), charArray);
+		charArray[data.size()] = '\n';
+
+		arduino.writeSerialPort(charArray, MAX_DATA_LENGTH);
+		arduino.readSerialPort(output, MAX_DATA_LENGTH);
+
+		cout<<">> "<<output<<endl;
+
+		delete [] charArray;
+	}
+	return 0;
 }
