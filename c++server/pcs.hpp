@@ -1,13 +1,17 @@
-#DEFINE NUMBER 5
+#define NUMBER 5
+#include "pc.hpp"
+#include <cstring>
+using namespace std;
 
 class pcs{
   private:
-    pc* p[NUMBER];
+    pca *p[NUMBER];
     int top;
   public:
     pcs();
     int pcsinuse();
-    string[] users();
-    bool registerpc();
-    bool uregisterpc();
+    char** users();
+    bool registerpc(int n, char * name);
+    bool uregisterpc(int n);
+    int getuserid(string name);
 };

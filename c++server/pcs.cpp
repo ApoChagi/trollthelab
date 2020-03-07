@@ -1,5 +1,5 @@
 #inlcude <iostream>
-#inlcude <string>
+#inlcude <cstring>
 #DEFINE NUMBER 5
 
 using namespace std;
@@ -18,8 +18,8 @@ int pcs::getuserid(string name){
   }
   return NUMBER+1;;
 }
-string[] pcs::users(){
-  string u[top];
+char** pcs::users(){
+  char *u[top];
   int ind=0;
   for(int i=0; i<NUMBER; i++){
     if(p[i]->getname()!="DEAD")
@@ -27,9 +27,9 @@ string[] pcs::users(){
   }
   return u;
 }
-bool pcs::registerpc(int n, string name){
+bool pcs::registerpc(int n, char *name){
   if(p[n]->getname()=="DEAD")return true;
-  p[n]=new pc(n, name);
+  p[n]=new pca(n, name);
   return false;
 }
 bool pcs::unregisterpc(int n){
