@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 #include<string>
-#include<stdlib.h>
+#include<stdio.h>
 //#include"serial.hpp"
 #include "processor.hpp"
 #define MAX_DATA_LENGTH 3
@@ -17,7 +17,7 @@ char *port = "\\\\.\\COM3";
 processor humpro;
 
 void getrequest(processor p){
-  printf("TEST OK\n");  
+  cout << "TEST OK" << endl;  
 }
 
 int main(){
