@@ -2,7 +2,7 @@
 using namespace std;
 #include<string>
 #include<stdlib.h>
-#include"serialport.cpp"
+#include"serialport.hpp"
 
 char output[MAX_DATA_LENGTH];
 char incomingData[MAX_DATA_LENGTH];
